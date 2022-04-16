@@ -104,9 +104,9 @@ class StyledElement {
   }
 
   addLoader(id, text, classes) {
-    this.element.innerHTML += `<input type="file" name="${id}" id="${id}" accept="image/png" style="display: none;"><label for="${id}" class="userBtn ${classes}" id="${id}-label">${text}</label>`
+    this.element.innerHTML += `<input type="file" name="${id}" id="${id}" accept="image/png, image/jpeg, image/jpg" style="display: none;"><label for="${id}" class="userBtn ${classes}" id="${id}-label">${text}</label>`
     document.getElementById(id).addEventListener('change', function(e) {
-      const tgt = e.target || window.event.srcElement
+      const tgt = e.target || window.event.target
       const files = tgt.files
 
       // FileReader support

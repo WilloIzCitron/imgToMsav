@@ -40,7 +40,7 @@ const headContainer = new StyledElement('headContainer shadow')
 
 // logo
 const head = new StyledElement('head')
-head.addHtml = 'PNG to MSAV'
+head.addHtml = 'IMG to MSAV'
 
 // ++
 headContainer.add = head
