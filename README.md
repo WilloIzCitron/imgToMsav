@@ -1,5 +1,5 @@
-# pngToMsav
-convert png to another png
+# imgToMsav
+convert some supported image into mindustry supported image map
 
 ## Developing and Running
 
