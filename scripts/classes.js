@@ -108,10 +108,6 @@ class StyledElement {
       e.stopPropagation()
       e.preventDefault()
       e.dataTransfer.dropEffect = 'copy'
-      document.getElementById(id).classList.add('dropArea--over')
-    })
-    document.getElementById(id).addEventListener(['dragleave', 'dragend'], function(e) {
-      document.getElementById(id).classList.remove('dropArea--over')
     })
     document.getElementById(id).addEventListener('drop', function(e) {
       e.stopPropagation()
@@ -119,6 +115,10 @@ class StyledElement {
       const files = e.dataTransfer.files
       if (FileReader && files && files.length) {
         const fr = new FileReader()
+        if(!files[0].type.match('image.png') || files[0].type.match('image.jpeg')) {
+          alert('File type not supported')
+          return
+        }
         fr.onload = function () {
             document.getElementById(id).src = fr.result
             myImg = fr.result
@@ -128,7 +128,6 @@ class StyledElement {
     }
     })
   }
-
   addLoader(id, text, classes) {
     this.element.innerHTML += `<input type="file" name="${id}" id="${id}" accept="image/png, image/jpeg" style="display: none;"><label for="${id}" class="userBtn ${classes}" id="${id}-label">${text}</label>`
     document.getElementById(id).addEventListener('change', function(e) {
