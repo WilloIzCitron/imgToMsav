@@ -16,8 +16,8 @@ const main = new StyledElement('main shadow')
 const imgSize = new StyledElement('imgSize')
 
 // drag and drop area
-const dropArea = new StyledElement('dropArea dataInteraction')
-dropArea.fileDragandDropHandler('dropArea', 'Drop image here')
+const dropArea = new StyledElement('dropArea')
+dropArea.fileDragandDropHandler('droper', 'Drop image here')
 
 
 // load button

@@ -113,7 +113,6 @@ class StyledElement {
       e.stopPropagation()
       e.preventDefault()
       const files = e.dataTransfer.files
-      
       if (FileReader && files && files.length) {
         const fr = new FileReader()
         fr.onload = function () {
