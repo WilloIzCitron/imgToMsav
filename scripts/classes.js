@@ -102,27 +102,50 @@ class StyledElement {
       downloadLink.setAttribute('href', dataURL)
     })
   }
+  fileDragandDropHandler(id, text, classes) {
+    this.element.innerHTML += `<div id="${id}" class="${classes} style="display: none; accept="image/png, image/jpeg">${text}</div>`
+    document.getElementById(id).addEventListener('dragover', function(e) {
+      e.stopPropagation()
+      e.preventDefault()
+      e.dataTransfer.dropEffect = 'copy'
+    })
+    document.getElementById(id).addEventListener('drop', function(e) {
+      e.stopPropagation()
+      e.preventDefault()
+      const files = e.dataTransfer.files
+      
+      if (FileReader && files && files.length) {
+        const fr = new FileReader()
+        fr.onload = function () {
+            document.getElementById(id).src = fr.result
+            myImg = fr.result
+            load = true
+        }
+        fr.readAsDataURL(files[0])
+    }
+    })
+  }
 
   addLoader(id, text, classes) {
-    this.element.innerHTML += `<input type="file" name="${id}" id="${id}" accept="image/png, image/jpeg, image/jpg" style="display: none;"><label for="${id}" class="userBtn ${classes}" id="${id}-label">${text}</label>`
+    this.element.innerHTML += `<input type="file" name="${id}" id="${id}" accept="image/png, image/jpeg" style="display: none;"><label for="${id}" class="userBtn ${classes}" id="${id}-label">${text}</label>`
     document.getElementById(id).addEventListener('change', function(e) {
       const tgt = e.target || window.event.target
       const files = tgt.files
 
       // FileReader support
       if (FileReader && files && files.length) {
-          const fr = new FileReader()
-          fr.onload = function () {
-              document.getElementById(id).src = fr.result
-              myImg = fr.result
-              load = true
-          }
-          fr.readAsDataURL(files[0])
-      }
+        const fr = new FileReader()
+        fr.onload = function () {
+            document.getElementById(id).src = fr.result
+            myImg = fr.result
+            load = true
+        }
+        fr.readAsDataURL(files[0])
+    }
 
       // Not supported
       else {
-          console.error('Your browser don\'t support FileReader')
+          console.error('Your browser doesn\'t support FileReader')
       }
     })
 

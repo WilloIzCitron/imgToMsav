@@ -15,6 +15,11 @@ const main = new StyledElement('main shadow')
 // picture size
 const imgSize = new StyledElement('imgSize')
 
+// drag and drop area
+const dropArea = new StyledElement('dropArea')
+dropArea.fileDragandDropHandler('dropArea', 'Drop image here', 'dropArea')
+
+
 // load button
 const loadContent = new StyledElement('loadContent dataInteraction')
 loadContent.addLoader('loader', 'Upload', 'shadow')

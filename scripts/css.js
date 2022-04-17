@@ -121,7 +121,7 @@ cssStyle.innerHTML = `
   }
 
   .settings {
-    grid-row: 4/5;
+    grid-row: 5/5;
     grid-column: 2/5;
     color: ${color.textDark};
     flex-direction: column;
@@ -288,6 +288,19 @@ cssStyle.innerHTML = `
     grid-column: 2/3;
   }
 
+  .dropArea {
+    grid-row: auto;
+    grid-column: 3/4;
+    background: ${color.background};
+    color: ${color.textDark};
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    width: 500px;
+    border-radius: 8px;
+  }
+
   .userBtn {
     padding: 20px 20%;
     margin: 20px;
@@ -403,6 +416,10 @@ cssStyle.innerHTML = `
       grid-column: 2/4;
     }
 
+    .dropArea {
+      display: none
+    }
+
     .footer {
       grid-row: 7/8;
       grid-column: 2/4;
@@ -477,6 +494,10 @@ cssStyle.innerHTML = `
     .settings {
       grid-row: 5/6;
       grid-column: 1/3;
+    }
+
+    .dropArea {
+      display: none
     }
 
     .footer {
