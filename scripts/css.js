@@ -289,16 +289,17 @@ cssStyle.innerHTML = `
   }
 
   .dropArea {
-    grid-row: auto;
+    grid-row: 5/4;
     grid-column: 3/4;
     background: ${color.background};
     color: ${color.textDark};
     display: flex;
     justify-content: center;
+    flex-direction: column;
     align-items: center;
-    height: 100px;
+    height: 187px;
     width: 500px;
-    border-radius: 8px;
+    border-radius: 20px;
   }
 
   .userBtn {
