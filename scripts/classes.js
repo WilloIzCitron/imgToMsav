@@ -115,7 +115,7 @@ class StyledElement {
       const files = e.dataTransfer.files
       if (FileReader && files && files.length) {
         const fr = new FileReader()
-        if(!files[0].type.match('image.png') || files[0].type.match('image.jpeg')) {
+        if(!files[0].type.match('image.png') && !files[0].type.match('image.jpeg')) {
           alert('File type not supported')
           return
         }
