@@ -17,7 +17,7 @@ const imgSize = new StyledElement('imgSize')
 
 // drag and drop area
 const dropArea = new StyledElement('dropArea')
-dropArea.fileDragandDropHandler('dropper', 'Drag and Drop PNG and JPEG imag format here')
+dropArea.fileDragandDropHandler('dropper', 'Drag and Drop PNG and JPEG image format here')
 
 
 // load button
@@ -58,7 +58,7 @@ const infoAfter = new StyledElement('infoContainer') // after converting
 const infoConverting = new StyledElement('infoContainer') // while converting
 
 infoConverting.hide()
-infoConverting.addHtml = '<span style="padding: 47px 0;">Converting...</span><span style="padding: 23px 0;">Please be patient, the system is converting your image</span>'
+infoConverting.addHtml = '<span style="padding: 47px 0;">Converting...</span><span style="padding: 23px 0;">Please wait as the system converts your image.</span>'
 
 infoBefore.text = 'Press the button to start converting.'
 // convert button
