@@ -103,11 +103,15 @@ class StyledElement {
     })
   }
   fileDragandDropHandler(id, text, classes) {
-    this.element.innerHTML += `<div id="${id}" class="${classes} style="display: none; accept="image/png, image/jpeg">${text}</div>`
+    this.element.innerHTML += `<div id="${id}" class="${classes}" style="display: shown;" accept="image/png, image/jpeg">\n<span class="${classes}--prompt">${text}</span>\n</div>`
     document.getElementById(id).addEventListener('dragover', function(e) {
       e.stopPropagation()
       e.preventDefault()
       e.dataTransfer.dropEffect = 'copy'
+      document.getElementById(id).classList.add('dropArea--over')
+    })
+    document.getElementById(id).addEventListener(['dragleave', 'dragend'], function(e) {
+      document.getElementById(id).classList.remove('dropArea--over')
     })
     document.getElementById(id).addEventListener('drop', function(e) {
       e.stopPropagation()

@@ -17,7 +17,8 @@ const imgSize = new StyledElement('imgSize')
 
 // drag and drop area
 const dropArea = new StyledElement('dropArea')
-dropArea.fileDragandDropHandler('dropper', 'Drag and Drop PNG and JPEG image format here')
+dropArea.fileDragandDropHandler('dropper', 'Drag and Drop PNG and JPEG imag format here', 'dropAreaBox')
+
 
 
 // load button

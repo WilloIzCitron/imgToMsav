@@ -300,7 +300,23 @@ cssStyle.innerHTML = `
     height: 187px;
     width: 500px;
     border-radius: 20px;
+    cursor: pointer;
+    border-color: ${color.main};
+  }
+
+  .dropArea--over {
+    border-style: solid;
+  }
+
+  .dropAreaBox {
     border-style: dashed;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    height: 187px;
+    width: 500px;
+    border-radius: 20px;
     border-color: ${color.main};
   }
 
