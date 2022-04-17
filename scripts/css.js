@@ -300,6 +300,8 @@ cssStyle.innerHTML = `
     height: 187px;
     width: 500px;
     border-radius: 20px;
+    border-style: dashed;
+    border-color: ${color.main};
   }
 
   .userBtn {
