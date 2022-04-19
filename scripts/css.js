@@ -262,7 +262,7 @@ cssStyle.innerHTML = `
     position: absolute;
     width: 14%;
     height: 100%;
-    background: url("img/arrowUp.png") no-repeat center;
+    background: url("assets/arrowUp.png") no-repeat center;
     background-size: 100%;
     opacity: .1;
     z-index: -1;
@@ -278,7 +278,7 @@ cssStyle.innerHTML = `
     position: absolute;
     width: 14%;
     height: 100%;
-    background: url("img/arrowDown.png") no-repeat center;
+    background: url("assets/arrowDown.png") no-repeat center;
     background-size: 100%;
     opacity: .1;
     z-index: -1;

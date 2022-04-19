@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>IMG to MSAV - Guides</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.4.1/lib/p5.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Mohave', sans-serif;
+        font-weight: 400;
+      }
+      a {
+        text-decoration: none;
+      }
+      body {
+        font-size: 1.5em;
+        min-height: 100%;
+      }
+      #wrapper {
+        user-select: none;
+        display: grid;
+        min-height: 100vh;
+        margin: 0;
+        grid-gap: 50px;
+        grid-template-rows: 80px auto auto auto 1fr auto 0;
+        grid-template-columns: 0 1fr auto 1fr 25vw;
+      }
+
+      .command {
+        padding: 10px 20px;
+        margin: 10px 0;
+        background: rgba(0,0,0,.125);
+        border-radius: 6px;
+      }
+
+      #defaultCanvas0 {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="wrapper">
+    </div>
+    <script src="scripts/prep.js" charset="utf-8"></script>
+    <script src="scripts/classes.js" charset="utf-8"></script>
+    <script src="scripts/app-guides.js" charset="utf-8"></script>
+    <script src="scripts/css.js" charset="utf-8"></script>
+  </body>
+</html>
