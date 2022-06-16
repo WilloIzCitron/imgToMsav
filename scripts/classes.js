@@ -104,7 +104,7 @@ class StyledElement {
   }
 
   addLoader({id, text, classes}) {
-    this.element.innerHTML += `<input type="file" name="${id}" id="${id}" accept="image/png" style="display: none;"><label for="${id}" class="userBtn ${classes}" id="${id}-label">${text}</label>`
+    this.element.innerHTML += `<input type="file" name="${id}" id="${id}" accept="image/png, image/jpeg" style="display: none;"><label for="${id}" class="userBtn ${classes}" id="${id}-label">${text}</label>`
     document.getElementById(id).addEventListener('change', function(e) {
       const tgt = e.target || window.event.srcElement
       const files = tgt.files
@@ -179,8 +179,8 @@ class StyledElement {
       const files = e.dataTransfer.files
       if (FileReader && files && files.length) {
         const fr = new FileReader()
-        if(!files[0].type.match('image.png')) {
-          alert('File type not supported (only png format)')
+        if(!files[0].type.match('image.png') || !files[0].type.match('image.jpeg')) {
+          alert('File type not supported (only png and jpeg format)')
           return
         }
         fr.onload = () => {

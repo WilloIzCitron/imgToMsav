@@ -49,7 +49,7 @@ const img = new StyledElement('img', 'img')
 
 // warning alert
 const warningSize = new StyledElement('warningSize')
-warningSize.text = 'Do not load huge pictures, it may lag while converting'
+warningSize.text = 'Do not load huge pictures, it may unresponsive while converting'
 
 // adding all stuff above (++)
 main.add = imgSize
@@ -165,8 +165,8 @@ sideBarInfo.addGroup('note', 'Don\'t make nsfw and furry arts.')
 const footer = new StyledElement('footer shadow')
 footer.addHtml = `<div class="center">
   <div>Contacts</div>
-  <div>Discord: <span class="link">L' kk#6790</span></div>
-  <div>Github: <a class="link" target="_blank" href="https://github.com/Lkk9">Lkk9</a></div>
+  <div>Discord:&nbspOriginal Made by&nbsp<span class="link">L' kk#6790</span></div>
+  <div>Github:&nbsp<a class="link" target="_blank" href="https://github.com/WilloIzCitron">WilloIzCitron</a>&nbsp|&nbspOriginal Made By:&nbsp<a class="link" target="_blank" href="https://github.com/Lkk9">Lkk9</a>&nbsp|&nbsp<a class="link" target="_blank" href="https://github.com/WilloIzCitron/pngToMsav">Source Code</a></div>
   <div class="cop" style="user-select: none;">Copyright (c) 2022 Copyright Holder All Rights Reserved.</div>
 </div>`
 
