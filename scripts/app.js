@@ -15,26 +15,41 @@ const main = new StyledElement('main shadow')
 // picture size
 const imgSize = new StyledElement('imgSize')
 
-// drag and drop area
-const dropArea = new StyledElement('dropArea')
-dropArea.fileDragandDropHandler('dropper', 'Drag and Drop PNG and JPEG imag format here', 'dropAreaBox')
-
-
-
 // load button
 const loadContent = new StyledElement('loadContent dataInteraction')
-loadContent.addLoader('loader', 'Upload', 'shadow')
+loadContent.addLoader({
+  id: 'loader',
+  text: 'Upload',
+  classes: 'shadow'
+})
+
+// drag n drop
+if (!window.mobileCheck()) {
+  const dragNDropArea = new StyledElement('dragNDropArea')
+  dragNDropArea.addDragNDrop({
+    id: 'dragNDropArea',
+    text: 'Drag and drop image here',
+    classes: 'dragNDrop',
+    hidingElement: document.getElementById('loader-label')
+  })
+
+  loadContent.add = dragNDropArea
+}
 
 // save button
 const saveContent = new StyledElement('saveContent dataInteraction')
-saveContent.addSaver('saver', 'Download', 'shadow')
+saveContent.addSaver({
+  id: 'saver',
+  text: 'Download',
+  classes: 'shadow'
+})
 
 // canvas
 const img = new StyledElement('img', 'img')
 
-// image size warning
+// warning alert
 const warningSize = new StyledElement('warningSize')
-warningSize.text = 'Do not load huge pictures, it may unresponsive while converting'
+warningSize.text = 'Do not load huge pictures, it may lag while converting'
 
 // adding all stuff above (++)
 main.add = imgSize
@@ -46,7 +61,7 @@ const headContainer = new StyledElement('headContainer shadow')
 
 // logo
 const head = new StyledElement('head')
-head.addHtml = 'IMG to MSAV'
+head.addHtml = 'PNG to MSAV'
 
 // ++
 headContainer.add = head
@@ -59,7 +74,7 @@ const infoAfter = new StyledElement('infoContainer') // after converting
 const infoConverting = new StyledElement('infoContainer') // while converting
 
 infoConverting.hide()
-infoConverting.addHtml = '<span style="padding: 47px 0;">Converting...</span><span style="padding: 23px 0;">Please wait as the system converts your image.</span>'
+infoConverting.addHtml = '<span style="padding: 47px 0;">Converting...</span>'
 
 infoBefore.text = 'Press the button to start converting.'
 // convert button
@@ -70,22 +85,25 @@ btnConvert.pressed = () => {
   infoConverting.show('flex')
   const top = headContainer.element.getBoundingClientRect().bottom+2
   if (top < 0) window.scrollTo({ top: top+window.scrollY, behavior: 'smooth' })
-  setTimeout(() => makeImg(),0)
+  setTimeout(() => makeImg())
   setTimeout(() => {
     infoConverting.hide()
     infoAfter.show('flex')
-  },0)
+  })
 }
 infoBefore.add = btnConvert
 
 infoAfter.hide()
-infoAfter.text = 'Conversion Done, you can save your image.'
+infoAfter.text = 'Done, you can save your image.'
 // reload button
 const btnReload = new StyledElement('btn', 'button')
-btnReload.addHtml = 'Revert to original'
+btnReload.addHtml = 'Show previous image'
 btnReload.pressed = () => {
+  showConvertButton()
   myImg = lastImg
   load = true
+}
+function showConvertButton() {
   infoAfter.hide()
   infoBefore.show('flex')
 }
@@ -139,7 +157,7 @@ settings.add = optionsCustom
 // side bar
 const sideBarInfo = new StyledElement('sideBarInfo shadow')
 
-sideBarInfo.addGroup('help', 'Load your image, press convert button and wait for process. You can apply some options below.')
+sideBarInfo.addGroup('help', `Load your image${window.mobileCheck() ? '' : ' (drag and drop is available)'}, press convert button and wait for process. You can apply some options below.`)
 sideBarInfo.addGroup('import in game', 'To make an image a mindustry map go to <div class="command">1. editor</div><div class="command">2. new map</div><div class="command">3. menu (in map editor)</div><div class="command">4. import</div><div class="command">5. import image file</div><div class="command">6. and open converted image</div>')
 sideBarInfo.addGroup('note', 'Don\'t make nsfw and furry arts.')
 
@@ -147,8 +165,8 @@ sideBarInfo.addGroup('note', 'Don\'t make nsfw and furry arts.')
 const footer = new StyledElement('footer shadow')
 footer.addHtml = `<div class="center">
   <div>Contacts</div>
-  <div>Discord:&nbspOriginal Made by&nbsp<span class="link">L' kk#6790</span></div>
-  <div>Github:&nbsp<a class="link" target="_blank" href="https://github.com/WilloIzCitron">WilloIzCitron</a>&nbsp|&nbspOriginal Made By:&nbsp<a class="link" target="_blank" href="https://github.com/Lkk9">Lkk9</a>&nbsp|&nbsp<a class="link" target="_blank" href="https://github.com/WilloIzCitron/pngToMsav">Source Code</a></div>
+  <div>Discord: <span class="link">L' kk#6790</span></div>
+  <div>Github: <a class="link" target="_blank" href="https://github.com/Lkk9">Lkk9</a></div>
   <div class="cop" style="user-select: none;">Copyright (c) 2022 Copyright Holder All Rights Reserved.</div>
 </div>`
 
@@ -166,6 +184,8 @@ setInterval(() => {
     img.show()
   }
 
+
+
   if (myImg.width*myImg.height > 500**2)
     warningSize.show()
   else
@@ -174,7 +194,8 @@ setInterval(() => {
   let currentOption = +optionsRadios.currentRadioValue
   optionsCustom.hide()
   if (currentOption === 0) {
-    allColors = Object.values(allObjects).splice(14, 42)
+    allColors = Object.values(allObjects).splice(24)
+    allColors.length -= 6
   } else if (currentOption === 1) {
     allColors = Object.values(allObjects)
   } else if (currentOption === -1) {

@@ -91,7 +91,7 @@ class StyledElement {
     }
   }
 
-  addSaver(id, text, classes) {
+  addSaver({id, text, classes}) {
     this.element.innerHTML += `<a class="userBtn ${classes}" id="${id}">${text}</a>`
 
     document.getElementById(id).addEventListener('click', function(e) {
@@ -102,55 +102,97 @@ class StyledElement {
       downloadLink.setAttribute('href', dataURL)
     })
   }
-  fileDragandDropHandler(id, text, classes) {
-    this.element.innerHTML += `<div id="${id}" class="${classes}" style="display: shown;" accept="image/png, image/jpeg">\n<span class="${classes}--prompt">${text}</span>\n</div>`
-    document.getElementById(id).addEventListener('dragover', function(e) {
-      e.stopPropagation()
-      e.preventDefault()
-      e.dataTransfer.dropEffect = 'copy'
-    })
-    document.getElementById(id).addEventListener('drop', function(e) {
-      e.stopPropagation()
-      e.preventDefault()
-      const files = e.dataTransfer.files
-      if (FileReader && files && files.length) {
-        const fr = new FileReader()
-        if(!files[0].type.match('image.png') && !files[0].type.match('image.jpeg')) {
-          alert('File type not supported')
-          return
-        }
-        fr.onload = function () {
-            document.getElementById(id).src = fr.result
-            myImg = fr.result
-            load = true
-        }
-        fr.readAsDataURL(files[0])
-    }
-    })
-  }
-  addLoader(id, text, classes) {
-    this.element.innerHTML += `<input type="file" name="${id}" id="${id}" accept="image/png, image/jpeg" style="display: none;"><label for="${id}" class="userBtn ${classes}" id="${id}-label">${text}</label>`
+
+  addLoader({id, text, classes}) {
+    this.element.innerHTML += `<input type="file" name="${id}" id="${id}" accept="image/png" style="display: none;"><label for="${id}" class="userBtn ${classes}" id="${id}-label">${text}</label>`
     document.getElementById(id).addEventListener('change', function(e) {
-      const tgt = e.target || window.event.target
+      const tgt = e.target || window.event.srcElement
       const files = tgt.files
 
       // FileReader support
       if (FileReader && files && files.length) {
-        const fr = new FileReader()
-        fr.onload = function () {
-            document.getElementById(id).src = fr.result
-            myImg = fr.result
-            load = true
-        }
-        fr.readAsDataURL(files[0])
-    }
+          const fr = new FileReader()
+          fr.onload = function () {
+              document.getElementById(id).src = fr.result
+              myImg = fr.result
+              load = true
+              showConvertButton()
+          }
+          fr.readAsDataURL(files[0])
+      }
 
       // Not supported
       else {
-          console.error('Your browser doesn\'t support FileReader')
+          console.error('Your browser don\'t support FileReader')
       }
     })
 
+  }
+
+  addDragNDrop({id, text, classes, hidingElement}) {
+    this.element.innerHTML += `<div id="${id}" class="${classes}">${text}</div>`
+    const area = document.getElementById(id)
+
+    document.addEventListener('dragover', (e) => {
+      e.stopPropagation()
+      e.preventDefault()
+      this.element.style.display = 'block'
+      hidingElement.style.display = 'none'
+    })
+    document.addEventListener('drop', (e) => {
+      e.stopPropagation()
+      e.preventDefault()
+      this.element.style.display = 'none'
+      hidingElement.style.display = 'block'
+    })
+    if (!(navigator.userAgent.match(/chrome|chromium|crios/i) || navigator.userAgent.match(/safari/i))) {
+      document.addEventListener('dragleave', (e) => {
+        e.stopPropagation()
+        e.preventDefault()
+        this.element.style.display = 'none'
+        hidingElement.style.display = 'block'
+      })
+    }
+
+    area.addEventListener('dragenter', (e) => {
+      e.stopPropagation()
+      e.preventDefault()
+      area.classList.add('dragNDropHoverd')
+    })
+    area.addEventListener('dragleave', (e) => {
+      e.stopPropagation()
+      e.preventDefault()
+      area.classList.remove('dragNDropHoverd')
+    })
+
+    area.addEventListener('drop', (e) => {
+      e.stopPropagation()
+      e.preventDefault()
+
+      setTimeout(() => {
+        this.element.style.display = 'none'
+        hidingElement.style.display = 'block'
+        area.classList.remove('dragNDropHoverd')
+      }, 400)
+
+      // thanks WilloIzCitron for this code (from WilloIzCitron/imgToMsav)
+      const files = e.dataTransfer.files
+      if (FileReader && files && files.length) {
+        const fr = new FileReader()
+        if(!files[0].type.match('image.png')) {
+          alert('File type not supported (only png format)')
+          return
+        }
+        fr.onload = () => {
+            document.getElementById(id).src = fr.result
+            myImg = fr.result
+            load = true
+            showConvertButton()
+        }
+        fr.readAsDataURL(files[0])
+      }
+
+    })
   }
 
   get currentRadioValue() {
